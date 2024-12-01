@@ -1,31 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 :root {
-  --background-color: #ffe4e1;  /* Soft pink */
-  --primary-color: #ffb6c1;     /* Light pink */
-  --accent-color: #ff69b4;      /* Hot pink */
-  --text-color: #4a4a4a;        /* Soft gray */
-  --heading-color: #b03060;     /* Deep pink */
+  --primary-color: #ffb6c1;  
+  --accent-color: #ff69b4; 
+  --text-color: #4a4a4a;
+  --heading-color: #b03060;
   --box-shadow: rgba(255, 182, 193, 0.5) 0px 4px 20px;
 }
 
 body {
-  background: var(--background-color);
+  background: url('https://user-images.githubusercontent.com/34781875/184046905-9e8e417b-43f5-40d2-a773-22b1b3907ed6.gif') no-repeat center center fixed;
+  background-size: cover;
   font-family: 'Poppins', sans-serif;
   color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
   margin: 0;
+  overflow: hidden;  /* Prevent scrollbars from appearing */
 }
 
 .container {
-  background: white;
+  background: rgba(255, 255, 255, 0.85);  /* Semi-transparent white */
   padding: 30px;
   border-radius: 15px;
   box-shadow: var(--box-shadow);
-  width: 70%;
+  width: 60%;
+  max-width: 800px;
   text-align: center;
 }
 
