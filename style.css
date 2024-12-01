@@ -8,6 +8,10 @@
   --box-shadow: rgba(255, 182, 193, 0.5) 0px 4px 20px;
 }
 
+audio {
+  display: none;
+}
+
 body {
   background: url('https://user-images.githubusercontent.com/34781875/184046905-9e8e417b-43f5-40d2-a773-22b1b3907ed6.gif') no-repeat center center fixed;
   background-size: cover;
@@ -18,11 +22,11 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  overflow: hidden;  /* Prevent scrollbars from appearing */
+  overflow: hidden; 
 }
 
 .container {
-  background: rgba(255, 255, 255, 0.85);  /* Semi-transparent white */
+  background: rgba(255, 255, 255, 0.85);
   padding: 30px;
   border-radius: 15px;
   box-shadow: var(--box-shadow);
