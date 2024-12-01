@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+  --background-color: #ffe4e1;  /* Soft pink */
+  --primary-color: #ffb6c1;     /* Light pink */
+  --accent-color: #ff69b4;      /* Hot pink */
+  --text-color: #4a4a4a;        /* Soft gray */
+  --heading-color: #b03060;     /* Deep pink */
+  --box-shadow: rgba(255, 182, 193, 0.5) 0px 4px 20px;
+}
+
+body {
+  background: var(--background-color);
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: var(--box-shadow);
+  width: 70%;
+  text-align: center;
+}
+
+h1, h2 {
+  color: var(--heading-color);
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  background: var(--primary-color);
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+  transition: background 0.3s ease;
+}
+
+ul li:hover {
+  background: var(--accent-color);
+}
+
+a {
+  color: var(--heading-color);
+  text-decoration: none;
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+footer a {
+  color: var(--accent-color);
+}
