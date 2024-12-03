@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 4 - Payroll Management</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #ffe4e1;
+      font-family: 'Source Code Pro', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .maincard {
+      background-color: rgba(35, 35, 35, 0.9);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+      width: 80%;
+      max-width: 900px;
+      margin: 20px;
+    }
+    h1 {
+      color: #ff69b4;
+      text-align: center;
+      text-shadow: 2px 2px 5px #ff1493;
+    }
+    input, button {
+      width: 80%;
+      padding: 10px;
+      margin: 10px auto;
+      font-size: 1rem;
+      border: 2px solid #ff69b4;
+      border-radius: 5px;
+      background-color: rgba(255, 105, 180, 0.2);
+      color: white;
+    }
+    button {
+      background-color: #ff69b4;
+    }
+    button:hover {
+      background-color: #ff1493;
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+      color: white;
+    }
+    th, td {
+      border: 2px solid #ff69b4;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #ff1493;
+    }
+    td {
+      background-color: rgba(255, 182, 193, 0.2);
+    }
+    .input-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .input-row input {
+      width: 48%;
+    }
+  </style>
+</head>
+<body>
+  <div class="maincard">
+    <h1>Assignment 4: Payroll Management</h1>
+    <div class="input-row">
+      <input type="text" id="employeeName" placeholder="Employee Name">
+      <input type="number" id="daysWorked" placeholder="Days Worked">
+      <input type="number" id="dailyRate" placeholder="Daily Rate">
+      <input type="number" id="deductionAmount" placeholder="Deduction Amount">
+    </div>
+    <button onclick="addEmployee()">Add Employee</button>
+    <button onclick="deleteEmployee()">Delete Employee</button>
+    <table id="payrollTable">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Employee Name</th>
+          <th>Days Worked</th>
+          <th>Daily Rate</th>
+          <th>Gross Pay</th>
+          <th>Deduction Amount</th>
+          <th>Net Pay</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Rows will be dynamically added here -->
+      </tbody>
+    </table>
+    <a href="index.html">Back to Homepage</a>
+  </div>
+
+  <script>
+    let employeeCount = 0;
+
+    function addEmployee() {
+      const name = document.getElementById('employeeName').value;
+      const daysWorked = parseFloat(document.getElementById('daysWorked').value);
+      const dailyRate = parseFloat(document.getElementById('dailyRate').value);
+      const deduction = parseFloat(document.getElementById('deductionAmount').value);
+
+      if (!name || isNaN(daysWorked) || isNaN(dailyRate) || isNaN(deduction)) {
+        alert('Please fill out all fields correctly.');
+        return;
+      }
+
+      const grossPay = daysWorked * dailyRate;
+      const netPay = grossPay - deduction;
+      const table = document.getElementById('payrollTable').querySelector('tbody');
+      
+      employeeCount++;
+      const row = table.insertRow();
+      row.innerHTML = `
+        <td>${employeeCount}</td>
+        <td>${name}</td>
+        <td>${daysWorked}</td>
+        <td>P${dailyRate.toLocaleString()}</td>
+        <td>P${grossPay.toLocaleString()}</td>
+        <td>P${deduction.toLocaleString()}</td>
+        <td>P${netPay.toLocaleString()}</td>
+      `;
+
+      clearInputs();
+    }
+
+    function deleteEmployee() {
+      const lineNum = prompt('Enter the line number to delete:');
+      if (!lineNum || isNaN(lineNum) || lineNum < 1 || lineNum > employeeCount) {
+        alert('Invalid line number.');
+        return;
+      }
+
+      const table = document.getElementById('payrollTable').querySelector('tbody');
+      table.deleteRow(lineNum - 1);
+      employeeCount--;
+
+      // Re-index rows
+      for (let i = 0; i < table.rows.length; i++) {
+        table.rows[i].cells[0].textContent = i + 1;
+      }
+    }
+
+    function clearInputs() {
+      document.getElementById('employeeName').value = '';
+      document.getElementById('daysWorked').value = '';
+      document.getElementById('dailyRate').value = '';
+      document.getElementById('deductionAmount').value = '';
+    }
+  </script>
+</body>
+</html>
