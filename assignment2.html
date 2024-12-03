@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 2 - Income Tax Calculator</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #ffe4e1;
+      font-family: 'Source Code Pro', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .maincard {
+      display: flex;
+      flex-direction: column;
+      background-color: rgba(35, 35, 35, 0.9);
+      width: 600px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    }
+    h1, h2 {
+      color: #ff69b4;
+      text-shadow: 2px 2px 5px #ff1493;
+      text-align: center;
+    }
+    input, button {
+      width: 80%;
+      padding: 10px;
+      margin: 10px auto;
+      font-size: 1rem;
+      border: 2px solid #ff69b4;
+      border-radius: 5px;
+      background-color: rgba(255, 105, 180, 0.2);
+      color: white;
+    }
+    button {
+      background-color: #ff69b4;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ff1493;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      border: 2px solid #ff69b4;
+      border-radius: 5px;
+      background-color: #fff0f5;
+      color: white;
+      font-size: 1.2rem;
+      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    a {
+      color: #ff69b4;
+      text-decoration: none;
+      text-align: center;
+      display: block;
+      margin-top: 20px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="maincard">
+    <h1>Assignment 2: Income Tax Calculator</h1>
+    <h2>Enter Taxable Income:</h2>
+    
+    <input type="number" id="incomeInput" placeholder="Enter taxable income" />
+
+    <button onclick="calculateTax()">Calculate Tax</button>
+
+    <div class="result" id="result"></div>
+
+    <a href="index.html">Back to Homepage</a>
+  </div>
+
+  <script>
+    function calculateTax() {
+      const income = parseFloat(document.getElementById('incomeInput').value);
+      let tax = 0;
+      let resultText = '';
+
+      if (isNaN(income) || income <= 0) {
+        resultText = 'Please enter a valid taxable income.';
+      } else {
+        if (income <= 250000) {
+          tax = 0;
+        } else if (income <= 400000) {
+          tax = (income - 250000) * 0.20;
+        } else if (income <= 800000) {
+          tax = 30000 + (income - 400000) * 0.25;
+        } else if (income <= 2000000) {
+          tax = 130000 + (income - 800000) * 0.30;
+        } else if (income <= 8000000) {
+          tax = 490000 + (income - 2000000) * 0.32;
+        } else {
+          tax = 2410000 + (income - 8000000) * 0.35;
+        }
+        resultText = `For a taxable income of ₱${income.toLocaleString()}, the income tax is ₱${tax.toFixed(2)}`;
+      }
+      document.getElementById('result').innerText = resultText;
+    }
+  </script>
+</body>
+</html>
