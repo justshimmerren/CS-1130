@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 1 - Conversion</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #ffe4e1;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #ff69b4;
+    }
+    input, button {
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .result {
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Assignment 1: Conversion</h1>
+  <h2>Select a Conversion Type:</h2>
+
+  <select id="conversionType">
+    <option value="ftoc">Fahrenheit to Celsius</option>
+    <option value="ctof">Celsius to Fahrenheit</option>
+    <option value="mtof">Meters to Feet</option>
+    <option value="ftom">Feet to Meters</option>
+  </select>
+
+  <br>
+  <input type="number" id="inputValue" placeholder="Enter value" />
+  <button onclick="performConversion()">Convert</button>
+
+  <div class="result" id="result"></div>
+
+  <br>
+  <a href="index.html">Back to Homepage</a>
+
+  <script>
+    function performConversion() {
+      const conversionType = document.getElementById('conversionType').value;
+      const inputValue = parseFloat(document.getElementById('inputValue').value);
+      let resultText = '';
+
+      if (isNaN(inputValue)) {
+        resultText = 'Please enter a valid number.';
+      } else {
+        switch (conversionType) {
+          case 'ftoc':
+            resultText = `${inputValue} °F = ${(inputValue - 32) * (5 / 9)} °C`;
+            break;
+          case 'ctof':
+            resultText = `${inputValue} °C = ${(inputValue * (9 / 5)) + 32} °F`;
+            break;
+          case 'mtof':
+            resultText = `${inputValue} meters = ${(inputValue * 3.28084).toFixed(2)} feet`;
+            break;
+          case 'ftom':
+            resultText = `${inputValue} feet = ${(inputValue / 3.28084).toFixed(2)} meters`;
+            break;
+          default:
+            resultText = 'Invalid conversion type.';
+        }
+      }
+
+      document.getElementById('result').innerText = resultText;
+    }
+  </script>
+</body>
+</html>
