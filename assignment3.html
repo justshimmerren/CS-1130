@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Assignment 3 - Factorial, Sum, and Average</title>
+  <title>Assignment 3 - Nth Factorial, Sum and Average</title>
   <link rel="stylesheet" href="style.css">
   <style>
     body {
@@ -21,16 +21,15 @@
       border-radius: 15px;
       box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
       width: 80%;
-      max-width: 700px;
-      margin: 20px;
-    }
-    h1, h2 {
-      color: #ff69b4;
+      max-width: 900px;
       text-align: center;
+    }
+    h1, h3 {
+      color: #ff69b4;
       text-shadow: 2px 2px 5px #ff1493;
     }
-    input, button {
-      width: 80%;
+    input {
+      width: 50%;
       padding: 10px;
       margin: 10px auto;
       font-size: 1rem;
@@ -40,76 +39,53 @@
       color: white;
     }
     button {
+      padding: 10px 20px;
+      font-size: 1rem;
       background-color: #ff69b4;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
     }
     button:hover {
       background-color: #ff1493;
     }
-    .result {
-      margin-top: 20px;
-      padding: 15px;
-      border: 2px solid #ff69b4;
-      border-radius: 5px;
-      background-color: #fff0f5;
-      color: black;
-      text-align: center;
-    }
-    a {
-      color: #ff69b4;
-      text-decoration: none;
-      display: block;
-      text-align: center;
-      margin-top: 20px;
+    p {
+      color: white;
+      font-size: 1.2rem;
     }
   </style>
 </head>
 <body>
   <div class="maincard">
-    <h1>Assignment 3: Factorial, Sum, and Average</h1>
-    <h2>Enter an Integer (n):</h2>
-    <input type="number" id="numberInput" placeholder="Enter a number n" />
-    <button onclick="calculateValues()">Calculate</button>
-    
-    <div class="result" id="result"></div>
-
+    <h1>Print N Natural Numbers</h1>
+    <p>
+      <label for="nlimit">Input a value for n:</label>
+      <input id="nlimit" type="number">
+      <button onclick="ShowNumbers()">Show Numbers</button>
+    </p>
+    <h3 id="ntitle"></h3>
+    <p id="nnumbers"></p>
     <a href="index.html">Back to Homepage</a>
   </div>
 
   <script>
-    function calculateValues() {
-      const n = parseInt(document.getElementById('numberInput').value);
-      if (isNaN(n) || n <= 0) {
-        document.getElementById('result').innerText = 'Please enter a valid positive integer.';
+    function ShowNumbers() {
+      let nlimit = parseInt(document.getElementById("nlimit").value);
+      let ntext = "";
+
+      if (isNaN(nlimit) || nlimit <= 0) {
+        alert("Please enter a positive integer.");
         return;
       }
 
-      // 1. Calculate factorial using a while loop
-      let factorial = 1, i = n;
-      while (i > 0) {
-        factorial *= i;
-        i--;
+      for (let i = 1; i <= nlimit; i++) {
+        ntext += i + " ";
       }
 
-      // 2. Calculate sum using a do-while loop
-      let sum = 0, j = 1;
-      do {
-        sum += j;
-        j++;
-      } while (j <= n);
-
-      // 3. Calculate average using a for loop
-      let average = 0;
-      for (let k = 1; k <= n; k++) {
-        average += k;
-      }
-      average /= n;
-
-      // Display results
-      document.getElementById('result').innerHTML = `
-        <p><strong>Factorial of ${n}:</strong> ${factorial.toLocaleString()}</p>
-        <p><strong>Sum of the first ${n} numbers:</strong> ${sum.toLocaleString()}</p>
-        <p><strong>Average of the first ${n} numbers:</strong> ${average.toFixed(2)}</p>
-      `;
+      document.getElementById("ntitle").innerHTML =
+        `The first ${nlimit} natural numbers are:`;
+      document.getElementById("nnumbers").innerHTML = ntext;
     }
   </script>
 </body>
