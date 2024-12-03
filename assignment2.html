@@ -12,22 +12,22 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      overflow: hidden;
+      flex-direction: column;
+      min-height: 100vh;
     }
     .maincard {
-      display: flex;
-      flex-direction: column;
       background-color: rgba(35, 35, 35, 0.9);
-      width: 600px;
       padding: 20px;
       border-radius: 15px;
       box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+      width: 80%;
+      max-width: 700px;
+      margin: 20px;
     }
     h1, h2 {
       color: #ff69b4;
-      text-shadow: 2px 2px 5px #ff1493;
       text-align: center;
+      text-shadow: 2px 2px 5px #ff1493;
     }
     input, button {
       width: 80%;
@@ -41,7 +41,6 @@
     }
     button {
       background-color: #ff69b4;
-      cursor: pointer;
     }
     button:hover {
       background-color: #ff1493;
@@ -53,19 +52,32 @@
       border-radius: 5px;
       background-color: #fff0f5;
       color: black;
-      font-size: 1.2rem;
-      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
       text-align: center;
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid #ff69b4;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #ff69b4;
+      color: white;
+    }
+    td {
+      background-color: rgba(255, 182, 193, 0.2);
     }
     a {
       color: #ff69b4;
       text-decoration: none;
-      text-align: center;
       display: block;
+      text-align: center;
       margin-top: 20px;
-    }
-    a:hover {
-      text-decoration: underline;
     }
   </style>
 </head>
@@ -73,12 +85,54 @@
   <div class="maincard">
     <h1>Assignment 2: Income Tax Calculator</h1>
     <h2>Enter Taxable Income:</h2>
-    
+
     <input type="number" id="incomeInput" placeholder="Enter taxable income" />
-
     <button onclick="calculateTax()">Calculate Tax</button>
-
+    
     <div class="result" id="result"></div>
+
+    <h2>Income Tax Table</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Net Taxable Income</th>
+          <th>Basic Tax + Rate</th>
+          <th>Example Income Tax</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Over - But Not Over ₱250,000</td>
+          <td>0%</td>
+          <td>₱180,000 → ₱0.00</td>
+        </tr>
+        <tr>
+          <td>₱250,000 - ₱400,000</td>
+          <td>20% of the excess over ₱250,000</td>
+          <td>₱320,000 → ₱14,000.00</td>
+        </tr>
+        <tr>
+          <td>₱400,000 - ₱800,000</td>
+          <td>₱30,000 + 25% of excess over ₱400,000</td>
+          <td>₱520,000 → ₱60,000.00</td>
+        </tr>
+        <tr>
+          <td>₱800,000 - ₱2,000,000</td>
+          <td>₱130,000 + 30% of excess over ₱800,000</td>
+          <td>₱930,000 → ₱169,000.00</td>
+        </tr>
+        <tr>
+          <td>₱2,000,000 - ₱8,000,000</td>
+          <td>₱490,000 + 32% of excess over ₱2,000,000</td>
+          <td>₱2,400,000 → ₱618,000.00</td>
+        </tr>
+        <tr>
+          <td>Over ₱8,000,000</td>
+          <td>₱2,410,000 + 35% of excess over ₱8,000,000</td>
+          <td>₱10,000,000 → ₱3,110,000.00</td>
+        </tr>
+      </tbody>
+    </table>
 
     <a href="index.html">Back to Homepage</a>
   </div>
@@ -87,27 +141,25 @@
     function calculateTax() {
       const income = parseFloat(document.getElementById('incomeInput').value);
       let tax = 0;
-      let resultText = '';
-
       if (isNaN(income) || income <= 0) {
-        resultText = 'Please enter a valid taxable income.';
-      } else {
-        if (income <= 250000) {
-          tax = 0;
-        } else if (income <= 400000) {
-          tax = (income - 250000) * 0.20;
-        } else if (income <= 800000) {
-          tax = 30000 + (income - 400000) * 0.25;
-        } else if (income <= 2000000) {
-          tax = 130000 + (income - 800000) * 0.30;
-        } else if (income <= 8000000) {
-          tax = 490000 + (income - 2000000) * 0.32;
-        } else {
-          tax = 2410000 + (income - 8000000) * 0.35;
-        }
-        resultText = `For a taxable income of ₱${income.toLocaleString()}, the income tax is ₱${tax.toFixed(2)}`;
+        document.getElementById('result').innerText = 'Please enter a valid taxable income.';
+        return;
       }
-      document.getElementById('result').innerText = resultText;
+      if (income <= 250000) {
+        tax = 0;
+      } else if (income <= 400000) {
+        tax = (income - 250000) * 0.20;
+      } else if (income <= 800000) {
+        tax = 30000 + (income - 400000) * 0.25;
+      } else if (income <= 2000000) {
+        tax = 130000 + (income - 800000) * 0.30;
+      } else if (income <= 8000000) {
+        tax = 490000 + (income - 2000000) * 0.32;
+      } else {
+        tax = 2410000 + (income - 8000000) * 0.35;
+      }
+      document.getElementById('result').innerText = 
+        `For a taxable income of ₱${income.toLocaleString()}, the income tax is ₱${tax.toLocaleString()}`;
     }
   </script>
 </body>
